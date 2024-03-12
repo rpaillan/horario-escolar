@@ -17,6 +17,7 @@ if (app) {
     {
       name: "Lenguaje",
       teacher: "Eloisa",
+      color: "#ffbf00",
       classes: [
         { day: "monday", modulos: ["1", "2"] },
         { day: "tuesday", modulos: ["5", "6"] },
@@ -27,6 +28,7 @@ if (app) {
     {
       name: "Matematicas",
       teacher: "Nora",
+      color: "#ffaa00",
       classes: [
         { day: "tuesday", modulos: ["1", "2"] },
         { day: "wednesday", modulos: ["7", "8"] },
@@ -36,13 +38,13 @@ if (app) {
     {
       name: "Musica",
       teacher: "--",
-      classes: [
-        { day: "wednesday", modulos: ["1", "2"] },
-      ],
+      color: "#244aca",
+      classes: [{ day: "wednesday", modulos: ["1", "2"] }],
     },
     {
       name: "Historia",
       teacher: "M.Jesus",
+      color: "#2c8fff",
       classes: [
         { day: "thursday", modulos: ["1", "2"] },
         { day: "friday", modulos: ["4"] },
@@ -51,6 +53,7 @@ if (app) {
     {
       name: "Cs. Naturales",
       teacher: "M.Jesus",
+      color: "#2e2d6e",
       classes: [
         { day: "tuesday", modulos: ["3", "4"] },
         { day: "friday", modulos: ["3"] },
@@ -59,20 +62,19 @@ if (app) {
     {
       name: "Ingles",
       teacher: "Paula",
-      classes: [
-        { day: "friday", modulos: ["1", "2"] },
-      ],
+      color: "#607b94",
+      classes: [{ day: "friday", modulos: ["1", "2"] }],
     },
     {
       name: "Religion",
       teacher: "Paula",
-      classes: [
-        { day: "monday", modulos: ["3", "4"] },
-      ],
+      color: "#a7c3cb",
+      classes: [{ day: "monday", modulos: ["3", "4"] }],
     },
     {
       name: "Ed. Fisica",
       teacher: "Sandra/Andrea",
+      color: "#6f9e5a",
       classes: [
         { day: "monday", modulos: ["5", "6"] },
         { day: "thursday", modulos: ["5", "6"] },
@@ -81,38 +83,32 @@ if (app) {
     {
       name: "A. Visuales",
       teacher: "M.Jesus",
-      classes: [
-        { day: "wednesday", modulos: ["3", "4"] },
-      ],
-    }
-    ,
+      color: "#8a76d1",
+      classes: [{ day: "wednesday", modulos: ["3", "4"] }],
+    },
     {
       name: "T. Desafios",
       teacher: "Astrid",
-      classes: [
-        { day: "monday", modulos: ["7", "8"] },
-      ],
+      color: "#ed1690",
+      classes: [{ day: "monday", modulos: ["7", "8"] }],
     },
     {
       name: "Tecnologia",
       teacher: "Victoria",
-      classes: [
-        { day: "tuesday", modulos: ["7"] },
-      ],
+      color: "#8e5fa8",
+      classes: [{ day: "tuesday", modulos: ["7"] }],
     },
     {
       name: "Orientacion",
       teacher: "Eloisa",
-      classes: [
-        { day: "tuesday", modulos: ["8"] },
-      ],
+      color: "#22c0df",
+      classes: [{ day: "tuesday", modulos: ["8"] }],
     },
     {
       name: "Taller Lectura/Escritura",
       teacher: "Eloisa",
-      classes: [
-        { day: "friday", modulos: ["5", "6"] },
-      ],
+      color: "#00a6fb",
+      classes: [{ day: "friday", modulos: ["5", "6"] }],
     },
   ];
 
@@ -130,31 +126,71 @@ if (app) {
       classe.modulos.forEach((modulo) => {
         const key = classe.day + "-" + modulo;
         if (key in lecturesMap) {
-          console.error("conflict betwen", lecturesMap[key].name, "and", lecture.name);
+          console.error(
+            "conflict betwen",
+            lecturesMap[key].name,
+            "and",
+            lecture.name
+          );
         } else {
           lecturesMap[key] = lecture;
         }
       });
     });
   });
-  console.log(lecturesMap);
+
+  const $ = (name, childs) => {
+    const el = document.createElement(name);
+    if (childs) {
+      childs.forEach((c) => el.appendChild(c));
+    }
+    return el;
+  };
+  const $t = (text) => {
+    return document.createTextNode(text);
+  };
 
   const createCell = (sector, day) => {
-    const key = day.name + "-" + sector.label
+    const key = day.name + "-" + sector.label;
     const cell = document.createElement("div");
     cell.className = "cell";
 
     if (lecturesMap[key]) {
       const lecture = lecturesMap[key];
-      cell.appendChild(document.createTextNode(lecture.name + " (" + lecture.teacher + ")"));
+      cell.style.backgroundColor = lecture.color || "white";
+      cell.appendChild(
+        document.createTextNode(lecture.name + " (" + lecture.teacher + ")")
+      );
     } else {
-      cell.classList.add("free")
+      cell.classList.add("free");
       cell.appendChild(document.createTextNode(key));
     }
     return cell;
   };
 
+  const cell = document.createElement("div");
+  cell.className = "cell sector";
+  app.appendChild(cell);
+
+  days.forEach((day) => {
+    const cell = document.createElement("div");
+    cell.className = "cell sector";
+    cell.appendChild(document.createTextNode(day.name));
+    app.appendChild(cell);
+  });
+
   modulos.forEach((sector) => {
+    const cell = document.createElement("div");
+    cell.className = "cell sector";
+    cell.appendChild(
+      $("div", [
+        $t(sector.label),
+        $("div", [$t(sector.times.start)]),
+        $("div", [$t(sector.times.end)]),
+      ])
+    );
+    app.appendChild(cell);
+
     days.forEach((day) => {
       app.appendChild(createCell(sector, day));
     });

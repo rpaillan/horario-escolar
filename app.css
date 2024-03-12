@@ -1,12 +1,13 @@
 .horario {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    .cell {
-        background-color: azure;
-        padding: 5px;
-    }
-    .cell.free {
-        opacity: 0.3;
-    }
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  padding: 10px;
+  .cell {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  .cell.free {
+    opacity: 0.3;
+  }
 }
