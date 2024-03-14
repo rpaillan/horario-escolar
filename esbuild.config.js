@@ -7,7 +7,7 @@ const args = process.argv;
 const config = {
   logLevel: 'info',
   entryPoints: ['src/index.tsx'],
-  outfile: 'public/build/bundle.js',
+  outfile: 'docs/build/bundle.js',
   bundle: true,
   define: {
     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
@@ -37,7 +37,7 @@ if (args.includes('--start')) {
     .then(async (ctx) => {
       await ctx.watch(); // this is needed only if live reloading will be used
       await ctx.serve({
-        servedir: 'public',
+        servedir: 'docs',
         onRequest: ({ remoteAddress, method, path, status, timeInMS }) => {
           console.info(remoteAddress, status, `"${method} ${path}" [${timeInMS}ms]`);
         },
