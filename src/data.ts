@@ -1,6 +1,12 @@
-const app = document.querySelector(".horario");
-if (app) {
-  const modulos = [
+export const data = {
+  days: [
+    { name: "monday" },
+    { name: "tuesday" },
+    { name: "wednesday" },
+    { name: "thursday" },
+    { name: "friday" },
+  ],
+  modulos: [
     { label: "1", times: { start: 800, end: 845 } },
     { label: "2", times: { start: 845, end: 930 } },
     { label: "recreo-1", times: { start: 930, end: 945 } },
@@ -12,8 +18,8 @@ if (app) {
     { label: "recreo-3", times: { start: 1300, end: 1400 } },
     { label: "7", times: { start: 1400, end: 1445 } },
     { label: "8", times: { start: 1445, end: 1530 } },
-  ];
-  const lectures = [
+  ],
+  lectures: [
     {
       name: "Lenguaje",
       teacher: "Eloisa",
@@ -38,7 +44,7 @@ if (app) {
     {
       name: "Musica",
       teacher: "--",
-      color: "#244aca",
+      color: "#fbf15e",
       classes: [{ day: "wednesday", modulos: ["1", "2"] }],
     },
     {
@@ -53,7 +59,7 @@ if (app) {
     {
       name: "Cs. Naturales",
       teacher: "M.Jesus",
-      color: "#2e2d6e",
+      color: "#6a68ff",
       classes: [
         { day: "tuesday", modulos: ["3", "4"] },
         { day: "friday", modulos: ["3"] },
@@ -110,89 +116,25 @@ if (app) {
       color: "#00a6fb",
       classes: [{ day: "friday", modulos: ["5", "6"] }],
     },
-  ];
+  ],
+};
 
-  const days = [
-    { name: "monday" },
-    { name: "tuesday" },
-    { name: "wednesday" },
-    { name: "thursday" },
-    { name: "friday" },
-  ];
+export const lecturesMap = {};
 
-  const lecturesMap = {};
-  lectures.forEach((lecture) => {
-    lecture.classes.forEach((classe) => {
-      classe.modulos.forEach((modulo) => {
-        const key = classe.day + "-" + modulo;
-        if (key in lecturesMap) {
-          console.error(
-            "conflict betwen",
-            lecturesMap[key].name,
-            "and",
-            lecture.name
-          );
-        } else {
-          lecturesMap[key] = lecture;
-        }
-      });
+data.lectures.forEach((lecture) => {
+  lecture.classes.forEach((classe) => {
+    classe.modulos.forEach((modulo, index) => {
+      const key = classe.day + "-" + modulo;
+      if (key in lecturesMap) {
+        console.error(
+          "conflict betwen",
+          lecturesMap[key].name,
+          "and",
+          lecture.name
+        );
+      } else {
+        lecturesMap[key] = { lecture, classe, enabled: index === 0 } ;
+      }
     });
   });
-
-  const $ = (name, childs) => {
-    const el = document.createElement(name);
-    if (childs) {
-      childs.forEach((c) => el.appendChild(c));
-    }
-    return el;
-  };
-  const $t = (text) => {
-    return document.createTextNode(text);
-  };
-
-  const createCell = (sector, day) => {
-    const key = day.name + "-" + sector.label;
-    const cell = document.createElement("div");
-    cell.className = "cell";
-
-    if (lecturesMap[key]) {
-      const lecture = lecturesMap[key];
-      cell.style.backgroundColor = lecture.color || "white";
-      cell.appendChild(
-        document.createTextNode(lecture.name + " (" + lecture.teacher + ")")
-      );
-    } else {
-      cell.classList.add("free");
-      cell.appendChild(document.createTextNode(key));
-    }
-    return cell;
-  };
-
-  const cell = document.createElement("div");
-  cell.className = "cell sector";
-  app.appendChild(cell);
-
-  days.forEach((day) => {
-    const cell = document.createElement("div");
-    cell.className = "cell sector";
-    cell.appendChild(document.createTextNode(day.name));
-    app.appendChild(cell);
-  });
-
-  modulos.forEach((sector) => {
-    const cell = document.createElement("div");
-    cell.className = "cell sector";
-    cell.appendChild(
-      $("div", [
-        $t(sector.label),
-        $("div", [$t(sector.times.start)]),
-        $("div", [$t(sector.times.end)]),
-      ])
-    );
-    app.appendChild(cell);
-
-    days.forEach((day) => {
-      app.appendChild(createCell(sector, day));
-    });
-  });
-}
+});

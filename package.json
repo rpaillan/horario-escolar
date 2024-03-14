@@ -1,0 +1,24 @@
+{
+  "name": "horario-escolar",
+  "version": "1.0.0",
+  "description": "Horario Escolar",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "build": "node esbuild.config.js --build",
+    "start": "node esbuild.config.js --start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.22",
+    "esbuild": "0.20.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "^5.4.2"
+  }
+}

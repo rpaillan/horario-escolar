@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/Horario.css"],
+  "sourcesContent": ["body {\n  font-family: \"Source Code Pro\", monospace;\n  font-size: 14px;\n  line-height: 120%;\n}\n\n.horario {\n  display: grid;\n  grid-template-columns: repeat(6, 1fr);\n  gap: 8px;\n  padding: 10px;\n\n  .cell {\n    padding: 5px;\n    border-radius: 5px;\n  }\n\n  .cell.lecture {\n    border: 1px solid #ddd;\n  }\n\n  .lecture-name {\n    font-weight: 600;\n  }\n\n  .cell.free {\n    opacity: 0.3;\n  }\n\n  .cell.sector {\n    display: flex;\n    border: 1px solid #ddd;\n  }\n\n  .cell.day {\n    font-size: 18px;\n    text-transform: capitalize;\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,eAAa,iBAAiB,EAAE;AAChC,aAAW;AACX,eAAa;AACf;AAEA,CAAC;AACC,WAAS;AACT,yBAAuB,OAAO,CAAC,EAAE;AACjC,OAAK;AACL,WAAS;AAET,GAAC;AACC,aAAS;AACT,mBAAe;AACjB;AAEA,GALC,IAKI,CAAC;AACJ,YAAQ,IAAI,MAAM;AACpB;AAEA,GAAC;AACC,iBAAa;AACf;AAEA,GAbC,IAaI,CAAC;AACJ,aAAS;AACX;AAEA,GAjBC,IAiBI,CAAC;AACJ,aAAS;AACT,YAAQ,IAAI,MAAM;AACpB;AAEA,GAtBC,IAsBI,CAAC;AACJ,eAAW;AACX,oBAAgB;AAClB;AACF;",
+  "names": []
+}
