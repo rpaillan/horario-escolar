@@ -1,0 +1,76 @@
+body {
+  font-family: "Ubuntu", monospace;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+.horario {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  gap: 8px;
+  padding: 10px;
+
+  .cell {
+    padding: 5px;
+    border-radius: 5px;
+
+    &.lecture {
+      background-color: #eee;
+      border: 1px solid #bbb;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .lecture-name {
+        font-size: 20px;
+        line-height: 120%;
+        margin-bottom: 5px;
+        text-wrap: balance;
+        .book {
+          flex-shrink: 0;
+        }
+      }
+      .lecture-teacher {
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+      }
+    }
+
+    &.free {
+      opacity: 0.7;
+    }
+
+    &.sector {
+      display: flex;
+      border: 1px solid #bbb;
+      background-color: #ccc;
+      display: flex;
+      justify-content: space-between;
+      .sector-name {
+        font-size: 25px;
+        padding-left: 4px;
+        display: flex;
+        align-items: center;
+      }
+      .times {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        .time {
+          display: flex;
+          gap: 4px;
+          align-items: center;
+        }
+      }
+    }
+
+    &.day {
+      font-size: 18px;
+      text-transform: capitalize;
+    }
+  }
+
+
+}

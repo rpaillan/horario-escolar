@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import esbuild from 'esbuild';
+import {sassPlugin} from 'esbuild-sass-plugin';
 
 dotenv.config();
 const args = process.argv;
@@ -20,6 +21,7 @@ if (args.includes('--build')) {
       ...config,
       minify: true,
       sourcemap: false,
+      plugins: [sassPlugin()]
     })
     .catch((e) => {
       console.error(e);
@@ -27,12 +29,13 @@ if (args.includes('--build')) {
     });
 }
 
-if (args.includes('--start')) {
+if (args.includes('--dev')) {
   esbuild
     .context({
       ...config,
       minify: false,
       sourcemap: true,
+      plugins: [sassPlugin()]
     })
     .then(async (ctx) => {
       await ctx.watch(); // this is needed only if live reloading will be used
