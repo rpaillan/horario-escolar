@@ -21,7 +21,7 @@ export const data = {
   ],
   lectures: [
     {
-      name: "Lenguaje y Comunicación",
+      name: "Lenguaje",
       teacher: "Eloisa",
       color: "#c63637",
       classes: [
@@ -48,7 +48,7 @@ export const data = {
       classes: [{ day: "wednesday", modulos: ["1", "2"] }],
     },
     {
-      name: "Historia, Geografía y Ciencias Sociales",
+      name: "Historia",
       teacher: "M. Jesus",
       color: "orange",
       classes: [
@@ -57,7 +57,7 @@ export const data = {
       ],
     },
     {
-      name: "Ciencias Naturales",
+      name: "C. Naturales",
       teacher: "M. Jesus",
       color: "#42ab49",
       classes: [
@@ -78,7 +78,7 @@ export const data = {
       classes: [{ day: "monday", modulos: ["3", "4"] }],
     },
     {
-      name: "Educación Física y Salud",
+      name: "Ed. Física",
       teacher: "Sandra / Andrea",
       color: "yellow",
       classes: [
@@ -87,13 +87,13 @@ export const data = {
       ],
     },
     {
-      name: "Artes Visuales",
+      name: "Artes",
       teacher: "M. Jesus",
       color: "#964B00",
       classes: [{ day: "wednesday", modulos: ["3", "4"] }],
     },
     {
-      name: "Taller Desafios Matematicos",
+      name: "Taller Matemática",
       teacher: "Astrid",
       color: "#5086c1",
       classes: [{ day: "monday", modulos: ["7", "8"] }],
@@ -111,7 +111,7 @@ export const data = {
       classes: [{ day: "tuesday", modulos: ["8"] }],
     },
     {
-      name: "Taller Lectura y Escritura",
+      name: "Taller Lenguaje",
       teacher: "Eloisa",
       color: "#c63637",
       classes: [{ day: "friday", modulos: ["5", "6"] }],
@@ -123,6 +123,10 @@ export const lecturesMap = {};
 
 data.lectures.forEach((lecture) => {
   lecture.classes.forEach((classe) => {
+
+    const sectors = classe.modulos.map(m => {
+      return data.modulos.find(modu => modu.label === m);  
+    })
     classe.modulos.forEach((modulo, index) => {
       const key = classe.day + "-" + modulo;
       if (key in lecturesMap) {
@@ -133,8 +137,9 @@ data.lectures.forEach((lecture) => {
           lecture.name
         );
       } else {
-        lecturesMap[key] = { lecture, classe, enabled: index === 0 };
+        lecturesMap[key] = { lecture, classe, sectors,  enabled: index === 0 };
       }
     });
+
   });
 });

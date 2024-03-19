@@ -22,6 +22,7 @@ function formatTime(value: number): string {
 export const HorarioContainer = () => {
   return (
     <div className="horario">
+      <div className="cell" />
       {data.days.map((day) => (
         <div className="cell day">{day.label}</div>
       ))}
@@ -29,18 +30,27 @@ export const HorarioContainer = () => {
         if (sector.isBreak) return;
         return (
           <>
+            <div className="cell sector">
+              <div className="sector-name">
+                {sector.isBreak ? "" : sector.label}
+              </div>
+              <div className="times">
+                <span className="time">
+                  {formatTime(sector.times.start)}
+                  <RiTimeLine size={15} />{" "}
+                </span>
+                <span className="time">
+                  {" "}
+                  {formatTime(sector.times.end)}
+                  <RiTimeLine size={15} />
+                </span>
+              </div>
+            </div>
             {data.days.map((day) => {
               const key = day.name + "-" + sector.label;
               if (lecturesMap[key]) {
-                const { lecture, classe, sectors, enabled } = lecturesMap[key];
+                const { lecture, classe, enabled } = lecturesMap[key];
                 if (!enabled) return null;
-                console.log({ lecture, classe, sectors });
-
-                const modulos = classe.modulos.join(" - ");
-                const startTime = formatTime(sectors[0].times.start);
-                const endTime = formatTime(
-                  sectors[sectors.length - 1].times.end
-                );
                 return (
                   <div
                     className="cell lecture"
@@ -48,19 +58,14 @@ export const HorarioContainer = () => {
                       gridRow: "span " + classe.modulos.length,
                     }}
                   >
-                    <div
-                      className="sidebar"
-                      style={{
-                        backgroundColor: lecture.color || "white",
-                      }}
-                    ></div>
-                    <div className="body">
-                      <div className="lecture-name">{lecture.name}</div>
-                      <div className="lecture-teacher">
-                        {lecture.teacher}{" "}
-                        <span className="time">{startTime}</span>{" "}
-                        <span className="time">{endTime}</span>
-                      </div>
+                    <div className="lecture-name">{lecture.name}</div>
+                    <div className="lecture-teacher">
+                      
+                      <RiBookFill
+                        className="book"
+                        size={40}
+                        color={lecture.color || "white"}
+                      />{" "}{lecture.teacher}{" "}
                     </div>
                   </div>
                 );
