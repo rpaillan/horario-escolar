@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { data, lecturesMap } from "./data";
 import {
   RiBookFill,
@@ -17,6 +17,10 @@ function formatTime(value: number): string {
     time.substring(time.length - 2, time.length);
 
   return time;
+}
+
+interface MyCustomCSS extends CSSProperties {
+  "--sidebar-color": string;
 }
 
 export const HorarioContainer = () => {
@@ -43,23 +47,22 @@ export const HorarioContainer = () => {
                 );
                 return (
                   <div
-                    className="cell lecture"
-                    style={{
-                      gridRow: "span " + classe.modulos.length,
-                    }}
+                    className={"cell lecture span-" + classe.modulos.length}
+                    style={
+                      {
+                        gridRow: "span " + classe.modulos.length,
+                        "--sidebar-color": lecture.color || "white",
+                      } as MyCustomCSS
+                    }
                   >
-                    <div
-                      className="sidebar"
-                      style={{
-                        backgroundColor: lecture.color || "white",
-                      }}
-                    ></div>
+                    <div className="sidebar"></div>
                     <div className="body">
                       <div className="lecture-name">{lecture.name}</div>
                       <div className="lecture-teacher">
-                        {lecture.teacher}{" "}
+                      ({lecture.teacher})
                         <span className="time">{startTime}</span>{" "}
                         <span className="time">{endTime}</span>
+                        
                       </div>
                     </div>
                   </div>

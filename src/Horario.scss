@@ -12,16 +12,27 @@ body {
   padding: 10px;
 
   .cell {
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
 
+    &.span-2 {
+      height: 150px;
+    }
+
     &.lecture {
-      border: 1px solid #eee;
+      border: 1px solid #cac9c9;
       display: flex;
+      background-color: rgb(242, 245, 247);
+      background: linear-gradient(to bottom right, var(--sidebar-color), var(--sidebar-color) 20%, rgb(242, 245, 247) 80%);
+
       .sidebar {
+        display: none;
         flex-shrink: 0;
         width: 10px;
         border-right: 1px solid #eee;
+        //background: linear-gradient(to top, var(--sidebar-color), rgb(242, 245, 247));
+        //background: var(--sidebar-color);
+        background-color: rgb(242, 245, 247);
       }
       .body {
         flex-grow: 1;
@@ -31,20 +42,23 @@ body {
         justify-content: space-between;
       }
       .lecture-name {
-        font-size: 18px;
+        font-size: 20px;
+        font-weight: 500;
         line-height: 120%;
         margin-bottom: 5px;
         text-wrap: balance;
-        .book {
-          flex-shrink: 0;
-
-        }
+        color: black;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: rgb(242, 245, 247);
+        width: fit-content;
       }
       .lecture-teacher {
         display: flex;
+        justify-content: flex-end;
         gap: 4px;
-        .time:first-child {
-          margin-left: auto;
+        .time:last-child {
+          margin-right: 10px;
         }
       }
     }
@@ -53,35 +67,12 @@ body {
       opacity: 0.7;
     }
 
-    &.sector {
-      display: flex;
-      border: 1px solid #bbb;
-      background-color: #ccc;
-      display: flex;
-      justify-content: space-between;
-      .sector-name {
-        font-size: 16px;
-        padding-left: 4px;
-        display: flex;
-        align-items: center;
-      }
-      .times {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-end;
-        .time {
-          display: flex;
-          gap: 4px;
-          align-items: center;
-        }
-      }
-    }
-
     &.day {
       font-size: 18px;
       text-transform: capitalize;
       text-align: center;
+      padding-top: 50px;
+      padding-bottom: 10px;
     }
   }
 
