@@ -1,10 +1,10 @@
 export const data = {
   days: [
-    { name: "monday", label: 'Lunes'},
-    { name: "tuesday", label: 'Mastes' },
-    { name: "wednesday", label: 'Miercoles' },
-    { name: "thursday", label: 'Jueves' },
-    { name: "friday", label: 'Viernes' },
+    { name: "monday", label: "Lunes" },
+    { name: "tuesday", label: "Mastes" },
+    { name: "wednesday", label: "Miercoles" },
+    { name: "thursday", label: "Jueves" },
+    { name: "friday", label: "Viernes" },
   ],
   modulos: [
     { label: "1", times: { start: 800, end: 845 } },
@@ -119,14 +119,13 @@ export const data = {
   ],
 };
 
-export const lecturesMap = {};
+export const lecturesMap: { [key: string]: any } = {};
 
 data.lectures.forEach((lecture) => {
   lecture.classes.forEach((classe) => {
-
-    const sectors = classe.modulos.map(m => {
-      return data.modulos.find(modu => modu.label === m);  
-    })
+    const sectors = classe.modulos.map((m) => {
+      return data.modulos.find((modu) => modu.label === m);
+    });
     classe.modulos.forEach((modulo, index) => {
       const key = classe.day + "-" + modulo;
       if (key in lecturesMap) {
@@ -137,9 +136,8 @@ data.lectures.forEach((lecture) => {
           lecture.name
         );
       } else {
-        lecturesMap[key] = { lecture, classe, sectors,  enabled: index === 0 };
+        lecturesMap[key] = { lecture, classe, sectors, enabled: index === 0 };
       }
     });
-
   });
 });

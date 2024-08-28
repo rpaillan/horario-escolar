@@ -1,11 +1,5 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties } from "react";
 import { data, lecturesMap } from "./data";
-import {
-  RiBookFill,
-  RiFootballLine,
-  RiHeartFill,
-  RiTimeLine,
-} from "@remixicon/react";
 
 import "./Horario.scss";
 
@@ -40,7 +34,6 @@ export const HorarioContainer = () => {
                 if (!enabled) return null;
                 console.log({ lecture, classe, sectors });
 
-                const modulos = classe.modulos.join(" - ");
                 const startTime = formatTime(sectors[0].times.start);
                 const endTime = formatTime(
                   sectors[sectors.length - 1].times.end
@@ -59,10 +52,9 @@ export const HorarioContainer = () => {
                     <div className="body">
                       <div className="lecture-name">{lecture.name}</div>
                       <div className="lecture-teacher">
-                      ({lecture.teacher})
+                        ({lecture.teacher})
                         <span className="time">{startTime}</span>{" "}
                         <span className="time">{endTime}</span>
-                        
                       </div>
                     </div>
                   </div>
